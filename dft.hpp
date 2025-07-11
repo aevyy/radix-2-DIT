@@ -10,13 +10,13 @@
 
 namespace dsp {
 
-class dft {
+class fft {
 public:
-    dft(int N);
+    fft() = default;
     std::vector<std::complex<double>> compute(const std::vector<std::complex<double>> &input);    
 private:
-    int N;
-    std::vector<std::vector<std::complex<double>>> twiddleTable;
-    void buildTwiddleTable();
+    std::vector<std::complex<double>> recursiveFFT(const std::vector<std::complex<double>> &x);
+    bool isPowerOfTwo(int n);
+    int nextPowerOfTwo(int n);
 };
 }   // Namespace dsp

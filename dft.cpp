@@ -2,32 +2,23 @@
 
 namespace dsp {
 
-dft::dft(int N) {
-    this->N = N;
-    buildTwiddleTable();
+bool fft::isPowerOfTwo(int n) {
+    return ((n > 0) && (n & n-1)) == 0;
 }
 
-void dft::buildTwiddleTable() {
-    this->twiddleTable.resize(N, std::vector<std::complex<double>>(N));
-    for (int k = 0; k < this->N; k++) {
-        for (int n = 0; n < this->N; n++) {
-            double angle = (-2 * M_PI * n * k) / this->N;
-            twiddleTable[k][n] = std::polar(1.0, angle);
-        }
-    }
+int fft::nextPowerOfTwo(int n) {
+    if (n <= 0) return 1;
+    int p = 1;
+    while (p < n) p <<= 1;
+    return p;
 }
 
-std::vector<std::complex<double>> dft::compute(const std::vector<std::complex<double>> &inputs) {
-    std::vector<std::complex<double>> output(N);
+std::vector<std::complex<double>> fft::compute(const std::vector<std::complex<double>> &inputs) {
+
+}
+
+std::vector<std::complex<double>> fft::recursiveFFT(const std::vector<std::complex<double>> &input) {
     
-    for (int k = 0; k < N; k++) {
-        output[k] = 0.0;
-        for (int n = 0; n < N; n++) {
-            output[k] += inputs[n] * twiddleTable[k][n];
-        }
-    }
-
-    return output;
 }
 
 }
